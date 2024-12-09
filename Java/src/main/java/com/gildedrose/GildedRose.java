@@ -1,15 +1,17 @@
 package com.gildedrose;
 
+import com.gildedrose.sale.AgedBrie;
+import com.gildedrose.sale.Backstage;
+import com.gildedrose.sale.SaleItem;
+import com.gildedrose.sale.Sulfura;
+
 import java.util.Arrays;
 import java.util.List;
 
+import static com.gildedrose.sale.SaleItem.*;
+
 class GildedRose {
 
-    public static final String AGED_BRIE = "Aged Brie";
-
-    public static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
-
-    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
     // We cannot touch this
     Item[] items;
@@ -23,8 +25,7 @@ class GildedRose {
     }
 
     private static void updateQuality(Item item) {
-        if (!item.name.equals(AGED_BRIE)
-            && !item.name.equals(BACKSTAGE)) {
+        if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE)) {
             if (item.quality > 0) {
                 if (!item.name.equals(SULFURAS)) {
                     item.quality = item.quality - 1;
@@ -72,4 +73,26 @@ class GildedRose {
             }
         }
     }
+
+    private static void updateQuality2(Item item) {
+        SaleItem saleItem = toSale(item);
+        saleItem.updateQuality();
+        item.sellIn = saleItem.getSellIn();
+        item.quality = saleItem.getQuality();
+    }
+
+    private static SaleItem toSale(Item item) {
+        if (AGED_BRIE.equals(item.name)) {
+            return new AgedBrie(false, item.sellIn, item.quality);
+        }
+        if (BACKSTAGE.equals(item.name)) {
+            return new Backstage(false, item.sellIn, item.quality);
+        }
+        if (SULFURAS.equals(item.name)) {
+            return new Sulfura(false, item.sellIn);
+        }
+        return new SaleItem(item.name, false, item.sellIn, item.quality);
+    }
+
+
 }
