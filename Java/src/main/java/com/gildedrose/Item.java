@@ -2,10 +2,13 @@ package com.gildedrose;
 
 public class Item {
 
+    // We cannot touch this
     public String name;
 
+    // We cannot touch this
     public int sellIn;
 
+    // We cannot touch this
     public int quality;
 
     public Item(String name, int sellIn, int quality) {
