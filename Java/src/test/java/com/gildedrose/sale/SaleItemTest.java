@@ -1,6 +1,5 @@
 package com.gildedrose.sale;
 
-import com.gildedrose.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

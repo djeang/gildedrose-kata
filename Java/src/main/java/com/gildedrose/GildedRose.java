@@ -21,60 +21,13 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        Arrays.stream(items).forEach(GildedRose::updateQuality2);
+        Arrays.stream(items).forEach(GildedRose::updateQuality);
     }
 
+    // The main design principle is to isolate the legacy Item class at the system boundary.
+    // New code relies solely on the SaleItem hierarchy, avoiding any dependency on Item.
+    // This class handles the translation between Item and SaleItem.
     private static void updateQuality(Item item) {
-        if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE)) {
-            if (item.quality > 0) {
-                if (!item.name.equals(SULFURAS)) {
-                    item.quality = item.quality - 1;
-                }
-            }
-        } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-
-                if (item.name.equals(BACKSTAGE)) {
-                    if (item.sellIn < 11) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-
-                    if (item.sellIn < 6) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (!item.name.equals(SULFURAS)) {
-            item.sellIn = item.sellIn - 1;
-        }
-
-        if (item.sellIn < 0) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACKSTAGE)) {
-                    if (item.quality > 0) {
-                        if (!item.name.equals(SULFURAS)) {
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
-            }
-        }
-    }
-
-    private static void updateQuality2(Item item) {
         SaleItem saleItem = toSale(item);
         saleItem.updateQuality();
         item.sellIn = saleItem.getSellIn();
