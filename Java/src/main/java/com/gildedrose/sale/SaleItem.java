@@ -37,7 +37,10 @@ public class SaleItem {
     }
 
     public final void updateQuality() {
-        sellIn = sellIn -1;
+        if (canSale()) {
+            sellIn = sellIn -1;
+        }
+
         quality = computeUpdatedQuality(quality);
     }
 
@@ -45,19 +48,19 @@ public class SaleItem {
     protected int computeUpdatedQuality(int originalQuality) {
 
         // Regular decrease
-        int regularDecrease = computeRegularDecrease();
+        int regularDelta = computeRegularDelta();
 
         // Rule : Once the sell by date has passed, Quality degrades twice as fast
         if (isSellDateExpired()) {
-            regularDecrease = regularDecrease * 2;
+            regularDelta = regularDelta * 2;
         }
 
         // Rule : "Conjured" items degrade in Quality twice as fast as normal items
-        if (conjured && regularDecrease < 0) {
-            regularDecrease = regularDecrease * 2;
+        if (conjured && regularDelta < 0) {
+            regularDelta = regularDelta * 2;
         }
 
-        int result = originalQuality + regularDecrease;
+        int result = originalQuality + regularDelta;
 
         // Rule: should be between 0 and 50 inclusive
         result = Integer.max(result, 0);
@@ -65,12 +68,16 @@ public class SaleItem {
         return result;
     }
 
-    protected int computeRegularDecrease() {
+    protected int computeRegularDelta() {
         return -1;
     }
 
+    protected boolean canSale() {
+        return true;
+    }
+
     private boolean isSellDateExpired() {
-        return sellIn <= 0;
+        return sellIn < 0;
     }
 
 }

@@ -6,12 +6,16 @@ import org.junit.jupiter.api.Test;
 class BackstageTest {
 
     @Test
-    void testComputeRegularDecrease() {
-        Backstage backstage = new Backstage(false, 5, 0);
-        Assertions.assertEquals(3, backstage.computeRegularDecrease());
+    void testComputeRegularDelta() {
 
-        backstage = new Backstage(false, 10, 0);
-        Assertions.assertEquals(2, backstage.computeRegularDecrease());
+        Backstage backstage = new Backstage(false, 4, 0);
+        Assertions.assertEquals(3, backstage.computeRegularDelta());
+
+        backstage = new Backstage(false, 5, 0);
+        Assertions.assertEquals(2, backstage.computeRegularDelta());
+
+        backstage = new Backstage(false, 9, 0);
+        Assertions.assertEquals(2, backstage.computeRegularDelta());
     }
 
 }

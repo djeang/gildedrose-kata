@@ -8,7 +8,7 @@ public class AgedBrie extends SaleItem {
     }
 
     @Override
-    protected int computeRegularDecrease() {
-        return +1;
+    protected int computeRegularDelta() {
+        return 1;
     }
 }

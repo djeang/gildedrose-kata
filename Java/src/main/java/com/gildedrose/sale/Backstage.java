@@ -7,14 +7,14 @@ public class Backstage extends SaleItem {
     }
 
     @Override
-    protected int computeRegularDecrease() {
-        if (getSellIn() <= 5) {
+    protected int computeRegularDelta() {
+        if (getSellIn() < 5) {
             return 3;
         }
-        if (getSellIn() <= 10) {
+        if (getSellIn() < 10) {
             return 2;
         }
-        return 0;
+        return 1;
     }
 
     @Override
