@@ -8,7 +8,6 @@ public class SaleItem {
 
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
-
     private final String name;
 
     private final boolean conjured;

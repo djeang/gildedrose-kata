@@ -1,6 +1,5 @@
 package com.gildedrose.sale;
 
-
 public class AgedBrie extends SaleItem {
 
     public AgedBrie(boolean conjured, int sellIn, int quality) {
@@ -11,4 +10,5 @@ public class AgedBrie extends SaleItem {
     protected int computeRegularDelta() {
         return 1;
     }
+
 }

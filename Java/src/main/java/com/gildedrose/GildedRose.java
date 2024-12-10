@@ -12,7 +12,6 @@ import static com.gildedrose.sale.SaleItem.*;
 
 class GildedRose {
 
-
     // We cannot touch this
     Item[] items;
 
@@ -46,6 +45,5 @@ class GildedRose {
         }
         return new SaleItem(item.name, false, item.sellIn, item.quality);
     }
-
 
 }

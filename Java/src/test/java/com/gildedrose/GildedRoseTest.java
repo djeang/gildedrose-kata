@@ -32,8 +32,4 @@ class GildedRoseTest {
         Assertions.assertEquals( expectedUpdatedQuality, items.get(0).quality);
     }
 
-
-
-
-
 }
